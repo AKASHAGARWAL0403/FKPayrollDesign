@@ -1,5 +1,9 @@
+import Testing.DataLoader;
+
 public class MainClass {
     public static void main(String args[]){
-        System.out.println("Hello World");
+        DataLoader dataLoader = new DataLoader();
+        dataLoader.callAddDataWorkHour();
+        dataLoader.getData().forEach(item -> System.out.println(item.getName()));
     }
 }
