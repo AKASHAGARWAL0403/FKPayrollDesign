@@ -1,4 +1,4 @@
-package EmployeeTypes;
+package EmployeeTypes.Models;
 
 public enum EmployeeType {
     HOURLY,

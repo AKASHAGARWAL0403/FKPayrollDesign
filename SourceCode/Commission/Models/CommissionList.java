@@ -1,6 +1,4 @@
-package Commission;
-
-import EmployeeTypes.Employee;
+package Commission.Models;
 
 import java.util.ArrayList;
 

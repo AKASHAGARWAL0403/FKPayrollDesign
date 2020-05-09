@@ -1,11 +1,10 @@
-package EmployeeTypes;
+package EmployeeTypes.Models;
 
-import Commission.CommissionBlock;
-import Commission.CommissionList;
+import Commission.Models.CommissionBlock;
+import Commission.Models.CommissionList;
 import Payment.PaymentTypes;
 
 public class Employee {
-    private static Double lastID;
     private Double id;
     private String name;
     private String address;
@@ -18,11 +17,14 @@ public class Employee {
     private CommissionList commissionList;
     private PaymentTypes paymentTypes;
 
+    public Employee() {
+        id = null;
+    }
+
     public Employee(String name, String address,
                     String contactNo, Integer age,
                     boolean unionMember, Double unionDueRate,
                     EmployeeType employeeType, PaymentTypes paymentTypes) {
-        this.id = lastID +1;
         this.name = name;
         this.address = address;
         this.contactNo = contactNo;
@@ -33,7 +35,10 @@ public class Employee {
         this.employeeType = employeeType;
         this.commissionList = new CommissionList();
         this.paymentTypes = paymentTypes;
-        lastID++;
+    }
+
+    public void setId(Double id){
+        this.id = id;
     }
 
     public Double getId() {

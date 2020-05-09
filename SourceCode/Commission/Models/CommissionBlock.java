@@ -1,4 +1,4 @@
-package Commission;
+package Commission.Models;
 
 public class CommissionBlock {
     private static Double lastID = Double.valueOf(0);
