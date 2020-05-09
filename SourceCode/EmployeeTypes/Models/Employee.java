@@ -10,9 +10,10 @@ public class Employee {
     private String name;
     private String address;
     private String contactNo;
-    private Integer age;
+    private Long age;
     private boolean unionMember;
     private Double unionDueRate;
+    private Double unionDueLeft;
     private Double unionExtraCharges;
     private EmployeeType employeeType;
     private CommissionList commissionList;
@@ -23,7 +24,7 @@ public class Employee {
     }
 
     public Employee(String name, String address,
-                    String contactNo, Integer age,
+                    String contactNo, Long age,
                     boolean unionMember, Double unionDueRate,
                     EmployeeType employeeType, PaymentTypes paymentTypes , Double commissionRate) {
         this.name = name;
@@ -36,10 +37,15 @@ public class Employee {
         this.employeeType = employeeType;
         this.commissionList = new CommissionList(commissionRate);
         this.paymentTypes = paymentTypes;
+        this.unionDueLeft = 0D;
     }
 
     public void setId(Double id){
         this.id = id;
+    }
+
+    public void setUnionDueLeft(Double unionDueLeft) {
+        this.unionDueLeft = unionDueLeft;
     }
 
     public Double getId() {
@@ -62,7 +68,7 @@ public class Employee {
         return contactNo;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
@@ -86,13 +92,23 @@ public class Employee {
         return commissionList;
     }
 
+    public Double getUnionDueLeft() {
+        return unionDueLeft;
+    }
+
+    public void addUnionWeeklyTax(){
+        if(unionMember){
+            unionDueLeft += unionDueRate;
+        }
+    }
+
     public CommissionBlock addSalesReport(String date , Double amount){
         return commissionList.addCommission(date , amount);
     }
 
     public Double salaryDeducted(){
         if(isUnionMember())
-            return getUnionDueRate()+ getUnionExtraCharges();
+            return unionDueLeft + unionExtraCharges;
         return 0D;
     }
 

@@ -2,6 +2,7 @@ package Testing;
 
 import EmployeeTypes.Models.Employee;
 import EmployeeTypes.Models.EmployeeType;
+import EmployeeTypes.Models.FlatSalaryEmployee;
 import EmployeeTypes.Models.WorkByHoursEmployee;
 import Payment.PaymentTypes;
 import Services.FlatSalaryEmployeeService;
@@ -9,40 +10,58 @@ import Services.Map.FlatSalaryEmployeeMapService;
 import Services.Map.WorkByHoursEmployeeMapService;
 import Services.WorkByHoursEmployeeService;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class DataLoader {
     private FlatSalaryEmployeeService flatSalaryEmployeeService;
     private WorkByHoursEmployeeService workByHoursEmployeeService;
 
-    public DataLoader(){
-        flatSalaryEmployeeService = new FlatSalaryEmployeeMapService();
-        workByHoursEmployeeService = new WorkByHoursEmployeeMapService();
+    public DataLoader(FlatSalaryEmployeeService f , WorkByHoursEmployeeService w){
+        flatSalaryEmployeeService = f;
+        workByHoursEmployeeService = w;
     }
 
     public WorkByHoursEmployee addDataWorkHour(String name, String address,
-                                String contactNo, Integer age,
-                                boolean unionMember, Double unionDueRate,
-                                EmployeeType employeeType, PaymentTypes paymentTypes,Double commissionRate , Double hourRate){
+                                               String contactNo, Long age,
+                                               boolean unionMember, Double unionDueRate,
+                                               EmployeeType employeeType, PaymentTypes paymentTypes, Double commissionRate , Double hourRate , Double UnionDueLeft , Double Id){
 
         WorkByHoursEmployee workByHoursEmployee = new WorkByHoursEmployee(name,address,contactNo,
                                     age , unionMember , unionDueRate , employeeType , paymentTypes,commissionRate , hourRate);
+        workByHoursEmployee.setUnionDueLeft(UnionDueLeft);
+        if(Id != null)
+            workByHoursEmployee.setId(Id);
         workByHoursEmployeeService.save(workByHoursEmployee);
         return workByHoursEmployee;
     }
 
+    public FlatSalaryEmployee addFlatSalary(String name, String address,
+                                               String contactNo, Long age,
+                                               boolean unionMember, Double unionDueRate,
+                                               EmployeeType employeeType, PaymentTypes paymentTypes, Double commissionRate , Double salary , Double UnionDueLeft , Double Id){
+
+        FlatSalaryEmployee flatSalaryEmployee = new FlatSalaryEmployee(name,address,contactNo,
+                age , unionMember , unionDueRate , employeeType , paymentTypes,commissionRate , salary);
+        flatSalaryEmployee.setUnionDueLeft(UnionDueLeft);
+        if(Id != null)
+            flatSalaryEmployee.setId(Id);
+        flatSalaryEmployeeService.save(flatSalaryEmployee);
+        return flatSalaryEmployee;
+    }
+
     public void callAddDataWorkHour(){
-        WorkByHoursEmployee akashWork = addDataWorkHour("Akash" , "Jharia" , "9162728446" , Integer.valueOf(21) ,
-                true , Double.valueOf(1000) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 20D , 400D);
-        akashWork.addTimeCard(10 , "Monday");
-        akashWork.addTimeCard(6,"Tuesday");
+        WorkByHoursEmployee akashWork = addDataWorkHour("Akash" , "Jharia" , "9162728446" , 21L ,
+                true , Double.valueOf(1000) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 20D , 400D , 0D ,null);
+        akashWork.addTimeCard(10L , "Monday");
+        akashWork.addTimeCard(6L ,"Tuesday");
         akashWork.addSalesReport("20/2/2020" , 1000D);
         akashWork.addSalesReport("04/03/2020" , 2000D);
 
-        WorkByHoursEmployee aritraWork = addDataWorkHour("Aritra" , "Moonidih" , "9123417253" , Integer.valueOf(21) ,
-                false , Double.valueOf(1001) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 10D , 300D);
-        aritraWork.addTimeCard(7,"Monday");
-        aritraWork.addTimeCard(6,"Tuesday");
+        WorkByHoursEmployee aritraWork = addDataWorkHour("Aritra" , "Moonidih" , "9123417253" , 21L ,
+                false , Double.valueOf(1001) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 10D , 300D , 0D ,null);
+        aritraWork.addTimeCard(7L,"Monday");
+        aritraWork.addTimeCard(6L,"Tuesday");
         aritraWork.addSalesReport("20/3/2020" , 1000D);
         aritraWork.addSalesReport("04/04/2020" , 2000D);
     }
