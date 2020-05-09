@@ -1,5 +1,6 @@
 package Testing;
 
+import Controllers.EmployeeController;
 import EmployeeTypes.Models.Employee;
 import EmployeeTypes.Models.EmployeeType;
 import EmployeeTypes.Models.FlatSalaryEmployee;
@@ -32,7 +33,8 @@ public class DataLoader {
         workByHoursEmployee.setUnionDueLeft(UnionDueLeft);
         if(Id != null)
             workByHoursEmployee.setId(Id);
-        workByHoursEmployeeService.save(workByHoursEmployee);
+        workByHoursEmployee = workByHoursEmployeeService.save(workByHoursEmployee);
+        EmployeeController.addEmployee(workByHoursEmployee.getId() , EmployeeType.HOURLY);
         return workByHoursEmployee;
     }
 
@@ -46,7 +48,8 @@ public class DataLoader {
         flatSalaryEmployee.setUnionDueLeft(UnionDueLeft);
         if(Id != null)
             flatSalaryEmployee.setId(Id);
-        flatSalaryEmployeeService.save(flatSalaryEmployee);
+        flatSalaryEmployee = flatSalaryEmployeeService.save(flatSalaryEmployee);
+        EmployeeController.addEmployee(flatSalaryEmployee.getId() , EmployeeType.MONTHLY);
         return flatSalaryEmployee;
     }
 
@@ -57,6 +60,7 @@ public class DataLoader {
         akashWork.addTimeCard(6L ,"Tuesday");
         akashWork.addSalesReport("20/2/2020" , 1000D);
         akashWork.addSalesReport("04/03/2020" , 2000D);
+        EmployeeController.updateEmployee(akashWork.getId() , EmployeeType.HOURLY);
 
         WorkByHoursEmployee aritraWork = addDataWorkHour("Aritra" , "Moonidih" , "9123417253" , 21L ,
                 false , Double.valueOf(1001) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 10D , 300D , 0D ,null);
@@ -64,10 +68,26 @@ public class DataLoader {
         aritraWork.addTimeCard(6L,"Tuesday");
         aritraWork.addSalesReport("20/3/2020" , 1000D);
         aritraWork.addSalesReport("04/04/2020" , 2000D);
+        EmployeeController.updateEmployee(aritraWork.getId() , EmployeeType.HOURLY);
     }
 
+    public void callAddDataFlatSalary(){
+        FlatSalaryEmployee sumit = addFlatSalary("sumit" , "Jharia" , "9162728446" , 21L ,
+                true , Double.valueOf(1000) , EmployeeType.HOURLY , PaymentTypes.PAYCHECK_DEPOSIT , 20D , 40000D , 0D ,null);
+        sumit.addSalesReport("20/2/2020" , 1000D);
+        sumit.addSalesReport("04/03/2020" , 2000D);
+        EmployeeController.updateEmployee(sumit.getId() , EmployeeType.MONTHLY);
+    }
 
-    public Set<WorkByHoursEmployee> getData(){
+    public void deletWorkHour(Double id){
+        workByHoursEmployeeService.deleteBYId(id);
+        EmployeeController.deleteEmployee(id , EmployeeType.HOURLY);
+    }
+
+    public Set<WorkByHoursEmployee> getWorkHourData(){
         return workByHoursEmployeeService.findAll();
+    }
+    public Set<FlatSalaryEmployee> getFlatSalaryData() {
+        return flatSalaryEmployeeService.findAll();
     }
 }
