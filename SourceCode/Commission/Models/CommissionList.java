@@ -1,23 +1,30 @@
 package Commission.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommissionList {
     private static Double lastID = Double.valueOf(0);
     private Double id;
-    private ArrayList<CommissionBlock> commissionBlockArrayList = new ArrayList<CommissionBlock>();
+    private Double rate;
+    private List<CommissionBlock> commissionBlockList = new ArrayList<CommissionBlock>();
 
-    public CommissionList(){
+    public CommissionList(Double rate){
+        this.rate = rate;
         this.id = lastID+1;
         lastID++;
     }
 
-    public CommissionBlock addCommission(String date , Double amount){
-        commissionBlockArrayList.add(new CommissionBlock(date , amount));
-        return commissionBlockArrayList.get(commissionBlockArrayList.size()-1);
+    public Double getRate() {
+        return rate;
     }
 
-    public ArrayList<CommissionBlock> getCommissionBlockArrayList() {
-        return commissionBlockArrayList;
+    public CommissionBlock addCommission(String date , Double amount){
+        commissionBlockList.add(new CommissionBlock(date , amount));
+        return commissionBlockList.get(commissionBlockList.size()-1);
+    }
+
+    public List<CommissionBlock> getCommissionBlockList() {
+        return commissionBlockList;
     }
 }

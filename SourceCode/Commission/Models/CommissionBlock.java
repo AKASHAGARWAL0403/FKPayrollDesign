@@ -27,7 +27,7 @@ public class CommissionBlock {
         return paid;
     }
 
-    private void setPaid(boolean paid) {
+    public void setPaid(boolean paid) {
         this.paid = paid;
     }
 }

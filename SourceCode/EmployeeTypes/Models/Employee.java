@@ -25,7 +25,7 @@ public class Employee {
     public Employee(String name, String address,
                     String contactNo, Integer age,
                     boolean unionMember, Double unionDueRate,
-                    EmployeeType employeeType, PaymentTypes paymentTypes) {
+                    EmployeeType employeeType, PaymentTypes paymentTypes , Double commissionRate) {
         this.name = name;
         this.address = address;
         this.contactNo = contactNo;
@@ -34,7 +34,7 @@ public class Employee {
         this.unionDueRate = unionDueRate;
         this.unionExtraCharges = Double.valueOf(0);
         this.employeeType = employeeType;
-        this.commissionList = new CommissionList();
+        this.commissionList = new CommissionList(commissionRate);
         this.paymentTypes = paymentTypes;
     }
 
@@ -89,4 +89,29 @@ public class Employee {
     public CommissionBlock addSalesReport(String date , Double amount){
         return commissionList.addCommission(date , amount);
     }
+
+    public Double salaryDeducted(){
+        if(isUnionMember())
+            return getUnionDueRate()+ getUnionExtraCharges();
+        return 0D;
+    }
+
+    public Double commissionGenerated(){
+        Double commission = 0D;
+        for(CommissionBlock entry : commissionList.getCommissionBlockList()){
+            if(!entry.isPaid()){
+                commission += entry.getAmount()*(commissionList.getRate()/100);
+            }
+        }
+        return commission;
+    }
+
+    public Double payCommissionGenerated(){
+        Double commission = commissionGenerated();
+        for(CommissionBlock entry : commissionList.getCommissionBlockList()){
+            entry.setPaid(true);
+        }
+        return commission;
+    }
+
 }
