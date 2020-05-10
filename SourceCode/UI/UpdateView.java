@@ -120,7 +120,11 @@ public class UpdateView {
         String hours = CommandLine.sc.nextLine();
         Double hour = Double.parseDouble(hours);
 
-        Employee obj = EmployeeController.getEmployeeService().findById(id);
+        Employee obj;
+        if(e == EmployeeType.HOURLY)
+            obj = EmployeeController.getWorkByHoursEmployeeService().findById(id);
+        else
+            obj = EmployeeController.getFlatSalaryEmployeeService().findById(id);
 
         obj.addSalesReport(null , hour);
         EmployeeController.updateEmployee(id , e);
@@ -134,7 +138,12 @@ public class UpdateView {
         String chargeStr = CommandLine.sc.nextLine();
         Double charge = Double.parseDouble(chargeStr);
 
-        Employee obj = EmployeeController.getEmployeeService().findById(id);
+        Employee obj;
+        if(e == EmployeeType.HOURLY)
+            obj = EmployeeController.getWorkByHoursEmployeeService().findById(id);
+        else
+            obj = EmployeeController.getFlatSalaryEmployeeService().findById(id);
+
 
         if(!obj.isUnionMember()){
             System.out.println("Not A Union Member!!");

@@ -20,6 +20,7 @@ public class SingleView {
         System.out.println("_____________________________");
         System.out.println("Press list to get back to previous menu");
     }
+
     public static void FlatSalaryEmployeeView(Double id){
         FlatSalaryEmployee obj = EmployeeController.getFlatSalaryEmployeeService().findById(id);
         System.out.println(obj);

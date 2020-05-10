@@ -41,7 +41,7 @@ public class DataLoader {
     public FlatSalaryEmployee addFlatSalary(String name, String address,
                                                String contactNo, Long age,
                                                boolean unionMember, Double unionDueRate,
-                                               EmployeeType employeeType, PaymentTypes paymentTypes, Double commissionRate , Double salary , Double UnionDueLeft , Double Id){
+                                               EmployeeType employeeType, PaymentTypes paymentTypes, Double commissionRate , Double salary , Double UnionDueLeft , Double Id) {
 
         FlatSalaryEmployee flatSalaryEmployee = new FlatSalaryEmployee(name,address,contactNo,
                 age , unionMember , unionDueRate , employeeType , paymentTypes,commissionRate , salary);

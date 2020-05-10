@@ -4,7 +4,9 @@ import Commission.Models.CommissionList;
 import Controllers.EmployeeController;
 import EmployeeTypes.Models.EmployeeType;
 import Payment.PaymentTypes;
+import Testing.DataChecker;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddView {
@@ -48,14 +50,20 @@ public class AddView {
             System.out.println("Enter the Employee Rate Rate");
             String hourStr = sc.nextLine();
             Double hourRate = Double.parseDouble(hourStr);
-            EmployeeController.getDataLoader().addDataWorkHour(name,address,contactNo,age,isUnion,unionDueRate,employeeType,paymentTypes,commissionRate,hourRate,0D,null);
-            System.out.println("Employee Has been Added");
+            boolean valid = DataChecker.StartWith(null,commissionRate,contactNo);
+            if(valid){
+                EmployeeController.getDataLoader().addDataWorkHour(name,address,contactNo,age,isUnion,unionDueRate,employeeType,paymentTypes,commissionRate,hourRate,0D,null);
+                System.out.println("Employee Has been Added");
+            }
         }else if(employeeType == EmployeeType.MONTHLY){
             System.out.println("Enter the Employee Salary");
             String salaryStr = sc.nextLine();
             Double salary = Double.parseDouble(salaryStr);
-            EmployeeController.getDataLoader().addFlatSalary(name,address,contactNo,age,isUnion,unionDueRate,employeeType,paymentTypes,commissionRate,salary,0D,null);
-            System.out.println("Employee Has Been Added");
+            boolean valid = DataChecker.StartWith(null,commissionRate,contactNo);
+            if(valid) {
+                EmployeeController.getDataLoader().addFlatSalary(name, address, contactNo, age, isUnion, unionDueRate, employeeType, paymentTypes, commissionRate, salary, 0D, null);
+                System.out.println("Employee Has Been Added");
+            }
         }
     }
 }
