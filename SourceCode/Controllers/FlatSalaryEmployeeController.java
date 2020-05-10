@@ -190,7 +190,6 @@ public class FlatSalaryEmployeeController {
     }
 
     public static JSONArray deleteFlatSalaryEmployee(Double Id , JSONArray ja) {
-        FlatSalaryEmployee obj = flatSalaryEmployeeService.findById(Id);
         Iterator iter = ja.iterator();
         while (iter.hasNext()) {
             JSONObject single = (JSONObject) iter.next();

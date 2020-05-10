@@ -64,6 +64,7 @@ public class EmployeeController {
         pw.write(jo.toJSONString());
         pw.flush();
         pw.close();
+        System.out.println("Loading Employee To JSON");
     }
 
     public static void loadEmployeeJSONToObjects(){
@@ -76,6 +77,7 @@ public class EmployeeController {
         JSONObject jo = (JSONObject) obj;
         WorkByHoursEmployeeController.loadingWorkByHourJSONToObjects((JSONArray) jo.get("WorkByHoursEmployee"),EmployeeController.dataLoader);
         FlatSalaryEmployeeController.loadingFlatSalaryJSONToObjects((JSONArray) jo.get("FlatSalaryEmployee") ,EmployeeController.dataLoader);
+        System.out.println("Loading JSON to Objects");
     }
 
     public static void addEmployee(Double Id , EmployeeType type){

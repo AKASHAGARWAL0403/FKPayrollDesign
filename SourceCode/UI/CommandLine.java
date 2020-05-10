@@ -20,7 +20,7 @@ public class CommandLine {
             }else if(resList[0].equalsIgnoreCase("update")){
 
             }else if(resList[0].equalsIgnoreCase("delete")){
-
+                DeleteView.StartWith();
             }else if(resList[0].equalsIgnoreCase("exit")){
                 break;
             }else{

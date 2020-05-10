@@ -24,7 +24,7 @@ public class MainClass {
 //        dataLoader.callAddDataFlatSalary();
         CommandLine.Start();
 
-        //EmployeeController.loadEmployeeToJSON();
+        EmployeeController.loadEmployeeToJSON();
         //dataLoader.getWorkHourData().forEach(System.out::println);
         //dataLoader.getFlatSalaryData().forEach(System.out::println);
     }
