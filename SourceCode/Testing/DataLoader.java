@@ -45,9 +45,9 @@ public class DataLoader {
 
         FlatSalaryEmployee flatSalaryEmployee = new FlatSalaryEmployee(name,address,contactNo,
                 age , unionMember , unionDueRate , employeeType , paymentTypes,commissionRate , salary);
-        flatSalaryEmployee.setUnionDueLeft(UnionDueLeft);
         if(Id != null)
             flatSalaryEmployee.setId(Id);
+        flatSalaryEmployee.setUnionDueLeft(UnionDueLeft);
         flatSalaryEmployee = flatSalaryEmployeeService.save(flatSalaryEmployee);
         EmployeeController.addEmployee(flatSalaryEmployee.getId() , EmployeeType.MONTHLY);
         return flatSalaryEmployee;

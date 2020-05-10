@@ -4,8 +4,13 @@ import Commission.Models.CommissionBlock;
 import Commission.Models.CommissionList;
 import Payment.PaymentTypes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class Employee {
+    protected static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+    private static Double lastId = 0D;
     private Double id;
     private String name;
     private String address;
@@ -40,8 +45,21 @@ public class Employee {
         this.unionDueLeft = 0D;
     }
 
+    public Double getLastId() {
+        return lastId;
+    }
+
+//    //public void setLastId(Double lastId) {
+//        this.lastId = lastId;
+//    }
+
     public void setId(Double id){
         this.id = id;
+        lastId = Math.max(id , lastId) + 1;
+    }
+
+    public void setUnionExtraCharges(Double unionExtraCharges) {
+        this.unionExtraCharges = unionExtraCharges;
     }
 
     public void setUnionDueLeft(Double unionDueLeft) {
@@ -103,6 +121,8 @@ public class Employee {
     }
 
     public CommissionBlock addSalesReport(String date , Double amount){
+        if(date == null)
+            date = dateFormatter.format(new Date());
         return commissionList.addCommission(date , amount);
     }
 
@@ -129,5 +149,4 @@ public class Employee {
         }
         return commission;
     }
-
 }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class CommandLine {
     private static String response = "/";
-    private static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
 
     public static void Start(){
         while(!response.equals("exit")) {
@@ -18,7 +18,7 @@ public class CommandLine {
             }else if(resList[0].equalsIgnoreCase("add")){
                 AddView.StartWith();
             }else if(resList[0].equalsIgnoreCase("update")){
-
+                UpdateView.StartWith();
             }else if(resList[0].equalsIgnoreCase("delete")){
                 DeleteView.StartWith();
             }else if(resList[0].equalsIgnoreCase("exit")){

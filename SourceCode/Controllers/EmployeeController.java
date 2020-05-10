@@ -2,6 +2,7 @@ package Controllers;
 
 import EmployeeTypes.Models.EmployeeType;
 import EmployeeTypes.Models.FlatSalaryEmployee;
+import Services.EmployeeService;
 import Services.FlatSalaryEmployeeService;
 import Services.WorkByHoursEmployeeService;
 import Testing.DataLoader;
@@ -15,11 +16,21 @@ import java.io.PrintWriter;
 
 public class EmployeeController {
     private static FlatSalaryEmployeeService flatSalaryEmployeeService;
+    private static EmployeeService employeeService;
     private static DataLoader dataLoader;
     private static WorkByHoursEmployeeService workByHoursEmployeeService;
 
     public static DataLoader getDataLoader() {
         return dataLoader;
+    }
+
+
+    public static EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    public static void setEmployeeService(EmployeeService employeeService) {
+        EmployeeController.employeeService = employeeService;
     }
 
     public static FlatSalaryEmployeeService getFlatSalaryEmployeeService() {

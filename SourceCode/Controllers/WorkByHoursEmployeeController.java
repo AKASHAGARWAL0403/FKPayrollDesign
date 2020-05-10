@@ -113,8 +113,8 @@ public class WorkByHoursEmployeeController {
             }
 
             JSONObject timeCards = (JSONObject) salary.get("Time_Cards");
-            List<String> keySet = List.of("Monday" , "Tuesday" , "Wednesday" ,
-                    "Thursday" , "Friday" , "Saturday" , "Sunday");
+            List<String> keySet = List.of("MONDAY" , "TUESDAY" , "WEDNESDAY" ,
+                    "THURSDAY" , "FRIDAY" , "SATURDAY" , "SUNDAY");
             keySet.forEach(item ->{
                 JSONObject singleTimeCard = (JSONObject) timeCards.get(item);
                 Long hours = (Long) singleTimeCard.get("Hours");

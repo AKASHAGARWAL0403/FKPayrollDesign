@@ -12,7 +12,8 @@ public class AbstractMapService<T extends Employee, ID extends Double> {
     }
 
     T save(T object){
-        object.setId(getNextId());
+        if(object.getId() == null)
+            object.setId(getNextId(object));
         map.put(object.getId() , object);
         return object;
     }
@@ -29,13 +30,9 @@ public class AbstractMapService<T extends Employee, ID extends Double> {
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
     }
 
-    Double getNextId(){
-        Double next_id = null;
-        try{
-            next_id = Collections.max(map.keySet()) + 1;
-        }catch (NoSuchElementException e){
-            next_id = 1D;
-        }
+    Double getNextId(T object){
+        Double next_id = object.getLastId() + 1;
         return next_id;
+
     }
 }

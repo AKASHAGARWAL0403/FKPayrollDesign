@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlatSalaryEmployee extends Employee{
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+//    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
     private Double salary;
     private String lastSalaryRecieved;
 

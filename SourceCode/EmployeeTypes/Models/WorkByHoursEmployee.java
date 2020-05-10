@@ -28,8 +28,8 @@ public class WorkByHoursEmployee extends Employee{
     }
 
     private void initializeTimeCard(){
-        List<String> keySet = List.of("Monday" , "Tuesday" , "Wednesday" ,
-                "Thursday" , "Friday" , "Saturday" , "Sunday");
+        List<String> keySet = List.of("MONDAY" , "TUESDAY" , "WEDNESDAY" ,
+                "THURSDAY" , "FRIDAY" , "SATURDAY" , "SUNDAY");
         for(String day : keySet){
             timeCard.put(day , new TimeCard());
         }
