@@ -76,6 +76,8 @@ public class FlatSalaryEmployee extends Employee{
         }
         res += "Payment type is " + super.getPaymentTypes() + "\n";
         res += "Employee Type is " + super.getEmployeeType() + "\n";
+        res += "Employee Monthly Salary is " + salary + "\n";
+        res += "Employee Recieved last salary on " + lastSalaryRecieved + "\n";
         res += "Employee Salary Due is " + this.salaryPayable() + "\n";
         res += "Commission due is " + super.commissionGenerated() +"\n";
         res += "Total Deduction(Union Tax Due + Union Extra Tax) is " + super.salaryDeducted() +" \n";

@@ -15,7 +15,24 @@ import java.io.PrintWriter;
 
 public class EmployeeController {
     private static FlatSalaryEmployeeService flatSalaryEmployeeService;
+    private static DataLoader dataLoader;
     private static WorkByHoursEmployeeService workByHoursEmployeeService;
+
+    public static DataLoader getDataLoader() {
+        return dataLoader;
+    }
+
+    public static FlatSalaryEmployeeService getFlatSalaryEmployeeService() {
+        return flatSalaryEmployeeService;
+    }
+
+    public static WorkByHoursEmployeeService getWorkByHoursEmployeeService() {
+        return workByHoursEmployeeService;
+    }
+
+    public static void setDataLoader(DataLoader dataLoader) {
+        EmployeeController.dataLoader = dataLoader;
+    }
 
     public static void setFlatSalaryEmployeeService(FlatSalaryEmployeeService flatSalaryEmployeeService) {
         EmployeeController.flatSalaryEmployeeService = flatSalaryEmployeeService;
@@ -49,7 +66,7 @@ public class EmployeeController {
         pw.close();
     }
 
-    public static void loadEmployeeJSONToObjects(DataLoader dataLoader){
+    public static void loadEmployeeJSONToObjects(){
         Object obj;
         try {
             obj = new JSONParser().parse(new FileReader("JSONExample.json"));
@@ -57,8 +74,8 @@ public class EmployeeController {
             return;
         }
         JSONObject jo = (JSONObject) obj;
-        WorkByHoursEmployeeController.loadingWorkByHourJSONToObjects((JSONArray) jo.get("WorkByHoursEmployee"),dataLoader);
-        FlatSalaryEmployeeController.loadingFlatSalaryJSONToObjects((JSONArray) jo.get("FlatSalaryEmployee") ,dataLoader);
+        WorkByHoursEmployeeController.loadingWorkByHourJSONToObjects((JSONArray) jo.get("WorkByHoursEmployee"),EmployeeController.dataLoader);
+        FlatSalaryEmployeeController.loadingFlatSalaryJSONToObjects((JSONArray) jo.get("FlatSalaryEmployee") ,EmployeeController.dataLoader);
     }
 
     public static void addEmployee(Double Id , EmployeeType type){

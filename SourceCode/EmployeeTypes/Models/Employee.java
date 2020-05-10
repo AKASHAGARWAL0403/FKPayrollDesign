@@ -33,7 +33,7 @@ public class Employee {
         this.age = age;
         this.unionMember = unionMember;
         this.unionDueRate = unionDueRate;
-        this.unionExtraCharges = Double.valueOf(0);
+        this.unionExtraCharges = 0D;
         this.employeeType = employeeType;
         this.commissionList = new CommissionList(commissionRate);
         this.paymentTypes = paymentTypes;

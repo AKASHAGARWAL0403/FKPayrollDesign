@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,37 +34,40 @@ public class FlatSalaryEmployeeController {
     public static JSONArray addingFlatSalaryEmployeeToJSON(){
         JSONObject jo = new JSONObject();
         JSONArray ja = new JSONArray();
+        List<Double> idUsed = new ArrayList<Double>();
         flatSalaryEmployeeService.findAll().forEach(obj -> {
-            JSONObject single = new JSONObject();
-            single.put("Id", obj.getId());
-            single.put("Name", obj.getName());
-            single.put("Address", obj.getAddress());
-            single.put("Contact", obj.getContactNo());
-            single.put("Age", obj.getAge());
-            single.put("Type", obj.getEmployeeType().toString());
-            single.put("Union_Due_Rate", obj.getUnionDueRate());
-            single.put("Union_Extra_Charges", obj.getUnionExtraCharges());
-            single.put("Union_Due_Left", obj.getUnionDueLeft());
-            single.put("Payment_Method", obj.getPaymentTypes().toString());
-            single.put("Union_Member" , obj.isUnionMember());
-            JSONObject commission = new JSONObject();
-            commission.put("Id", obj.getCommissionList().getId());
-            commission.put("Rate", obj.getCommissionList().getRate());
-            JSONArray singleArray = new JSONArray();
-            for (CommissionBlock entry : obj.getCommissionList().getCommissionBlockList()) {
-                JSONObject commissionBlock = new JSONObject();
-                commissionBlock.put("Id", entry.getId());
-                commissionBlock.put("Date", entry.getDate());
-                commissionBlock.put("Amount", entry.getAmount());
-                commissionBlock.put("Paid", entry.isPaid());
-                singleArray.add(commissionBlock);
+            if(!idUsed.contains(obj.getId())) {
+                JSONObject single = new JSONObject();
+                single.put("Id", obj.getId());
+                single.put("Name", obj.getName());
+                single.put("Address", obj.getAddress());
+                single.put("Contact", obj.getContactNo());
+                single.put("Age", obj.getAge());
+                single.put("Type", obj.getEmployeeType().toString());
+                single.put("Union_Due_Rate", obj.getUnionDueRate());
+                single.put("Union_Extra_Charges", obj.getUnionExtraCharges());
+                single.put("Union_Due_Left", obj.getUnionDueLeft());
+                single.put("Payment_Method", obj.getPaymentTypes().toString());
+                single.put("Union_Member", obj.isUnionMember());
+                JSONObject commission = new JSONObject();
+                commission.put("Id", obj.getCommissionList().getId());
+                commission.put("Rate", obj.getCommissionList().getRate());
+                JSONArray singleArray = new JSONArray();
+                for (CommissionBlock entry : obj.getCommissionList().getCommissionBlockList()) {
+                    JSONObject commissionBlock = new JSONObject();
+                    commissionBlock.put("Id", entry.getId());
+                    commissionBlock.put("Date", entry.getDate());
+                    commissionBlock.put("Amount", entry.getAmount());
+                    commissionBlock.put("Paid", entry.isPaid());
+                    singleArray.add(commissionBlock);
+                }
+                commission.put("Commission_Blocks", singleArray);
+                single.put("Commission", commission);
+                single.put("Salary", obj.getSalary());
+                single.put("Last_Date_Paid", obj.getLastSalaryRecieved());
+                idUsed.add(obj.getId());
+                ja.add(single);
             }
-            commission.put("Commission_Blocks", singleArray);
-            single.put("Commission", commission);
-            single.put("Salary" , obj.getSalary());
-            single.put("Last_Date_Paid" , obj.getLastSalaryRecieved());
-
-            ja.add(single);
         });
         return ja;
     }
